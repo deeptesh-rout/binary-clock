@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Binary Clock</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color: #121212;
+        color: #eee;
+        font-family: monospace;
+        overflow:hidden;
+        user-select:none;
+      }
+
+      .clock {
+        display: flex;
+        gap: 1px;
+        background:#141414;
+        border:#242424 solid 2px;
+        padding:2rem;
+        border-radius:3rem;
+        align-content:center;
+        height:.6rem;
+        box-shadow:0px 0px 20px rgba(255,99,71, .15)
+      }
+
+      .digit {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        width: 20px;
+        height: 20px;
+        border: none;
+      }
+
+      .led {
+        background-color: #000;
+        border-radius: 0%;
+        width: 80%;
+        height: 120%;
+        margin: auto;
+      }
+
+      .led.on {
+        background-color: tomato;
+        transform:scale(3);
+      }
+
+      @media (max-width: 500px) {
+        .digit {
+          width: 15px;
+          height: 20px;
+        }
+
+        .led {
+          width: 60%;
+          height: 60%;
+        }
+      }
+
+      .title {
+        position:absolute;
+        font-family:arial;
+        color:#fff;
+      }
+      ._1 {
+        top:20px;
+        left:70px;
+      }
+      ._2 {
+        top:20px;
+        right:30px;
+      }
+      .logo {
+        top:30px;
+        left:30px;
+        position:absolute;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="clock"></div>
+    <h3 class="title _1" >Binary Clock</h3>
+    <script>
+      const clock = document.querySelector('.clock');
+
+      function updateClock() {
+        const now = new Date();
+        const hours = now.getHours().toString(2).padStart(8, '0');
+        const minutes = now.getMinutes().toString(2).padStart(8, '0');
+        const seconds = now.getSeconds().toString(2).padStart(8, '0');
+
+        clock.innerHTML = ''; 
+
+        for (let i = 0; i < 8; i++) {
+          const digit = document.createElement('div');
+          digit.classList.add('digit');
+          if (hours[i] === '1') {
+            digit.innerHTML = '<div class="led on"></div>';
+          } else {
+            digit.innerHTML = '<div class="led"></div>';
+          }
+          clock.appendChild(digit);
+        }
+
+        for (let i = 0; i < 8; i++) {
+          const digit = document.createElement('div');
+          digit.classList.add('digit');
+          if (minutes[i] === '1') {
+            digit.innerHTML = '<div class="led on"></div>';
+          } else {
+            digit.innerHTML = '<div class="led"></div>';
+          }
+          clock.appendChild(digit);
+        }
+
+        for (let i = 0; i < 8; i++) {
+          const digit = document.createElement('div');
+          digit.classList.add('digit');
+          if (seconds[i] === '1') {
+            digit.innerHTML = '<div class="led on"></div>';
+          } else {
+            digit.innerHTML = '<div class="led"></div>';
+          }
+          clock.appendChild(digit);
+        }
+      }
+
+      setInterval(updateClock, 1000);
+      updateClock(); 
+    </script>
+
+  </body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
